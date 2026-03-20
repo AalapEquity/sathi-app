@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0A0F1E"/>
+  <rect x="100" y="100" width="312" height="312" rx="70" fill="rgba(0,230,118,0.08)" stroke="rgba(0,230,118,0.2)" stroke-width="2"/>
+  <line x1="148" y1="240" x2="364" y2="240" stroke="#00E676" stroke-width="30" stroke-linecap="round"/>
+  <line x1="148" y1="300" x2="280" y2="300" stroke="#00E676" stroke-width="30" stroke-linecap="round"/>
+  <circle cx="360" cy="300" r="52" fill="#00E676"/>
+  <circle cx="360" cy="300" r="52" fill="url(#gg)" opacity="0.5"/>
+  <defs><radialGradient id="gg"><stop offset="0%" stop-color="#69F0AE"/><stop offset="100%" stop-color="#00C853"/></radialGradient></defs>
+</svg>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাথী — সারা বাংলাদেশ, এক ক্লাসরুমে</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Baloo+Da+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash-screen" class="splash">
+  <div class="splash-content">
+    <div class="splash-logo">
+      <div class="logo-circle">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" fill="white" opacity="0.2"/>
+          <path d="M16 20h16M16 28h10" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="34" cy="28" r="4" fill="#FF6B35"/>
+        </svg>
+      </div>
+      <h1 class="splash-title">সাথী</h1>
+      <p class="splash-sub">সারা বাংলাদেশ, এক ক্লাসরুমে</p>
+    </div>
+    <div class="splash-loader">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="hidden">
+
+  <!-- AUTH SCREEN -->
+  <div id="auth-screen" class="screen">
+    <div class="auth-bg">
+      <div class="auth-shape s1"></div>
+      <div class="auth-shape s2"></div>
+      <div class="auth-shape s3"></div>
+    </div>
+    <div class="auth-container">
+      <div class="auth-logo">
+        <div class="logo-circle small">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+            <path d="M16 20h16M16 28h10" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="34" cy="28" r="5" fill="#FF6B35"/>
+          </svg>
+        </div>
+        <span>সাথী</span>
+      </div>
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchTab('login')">লগইন</button>
+          <button class="auth-tab" onclick="switchTab('register')">নিবন্ধন</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="auth-form">
+          <h2>স্বাগতম! 👋</h2>
+          <p class="auth-desc">আপনার অ্যাকাউন্টে প্রবেশ করুন</p>
+          <div class="input-group">
+            <label>ইমেইল</label>
+            <input type="email" id="login-email" placeholder="example@gmail.com">
+          </div>
+          <div class="input-group">
+            <label>পাসওয়ার্ড</label>
+            <input type="password" id="login-password" placeholder="••••••••">
+          </div>
+          <button class="btn-primary" onclick="loginUser()">লগইন করুন</button>
+          <div class="divider"><span>অথবা</span></div>
+          <button class="btn-google" onclick="loginWithGoogle()">
+            <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.3 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 19.3-7.7 19.3-20 0-1.3-.1-2.7-.3-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4c-7.7 0-14.4 4.3-17.7 10.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.6-3.5-11.2-8.3l-6.5 5C9.7 39.7 16.4 44 24 44z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.5l6.2 5.2C40.8 35.4 44 30.1 44 24c0-1.3-.1-2.7-.4-4z"/></svg>
+            Google দিয়ে লগইন
+          </button>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form" class="auth-form hidden">
+          <h2>যোগ দিন! 🎓</h2>
+          <p class="auth-desc">নতুন অ্যাকাউন্ট তৈরি করুন</p>
+          <div class="input-group">
+            <label>আপনার নাম</label>
+            <input type="text" id="reg-name" placeholder="মো. রাহিম">
+          </div>
+          <div class="input-group">
+            <label>ক্লাস</label>
+            <select id="reg-class">
+              <option value="">ক্লাস বেছে নিন</option>
+              <option>ক্লাস ৬</option><option>ক্লাস ৭</option><option>ক্লাস ৮</option>
+              <option>ক্লাস ৯</option><option>ক্লাস ১০ (SSC)</option>
+              <option>HSC ১ম বর্ষ</option><option>HSC ২য় বর্ষ</option>
+              <option>বিশ্ববিদ্যালয় ১ম বর্ষ</option><option>বিশ্ববিদ্যালয় ২য় বর্ষ</option>
+              <option>বিশ্ববিদ্যালয় ৩য় বর্ষ</option><option>বিশ্ববিদ্যালয় ৪র্থ বর্ষ</option>
+              <option>সিনিয়র / গ্র্যাজুয়েট</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>জেলা</label>
+            <select id="reg-district">
+              <option value="">জেলা বেছে নিন</option>
+              <option>ঢাকা</option><option>চট্টগ্রাম</option><option>রাজশাহী</option>
+              <option>খুলনা</option><option>বরিশাল</option><option>সিলেট</option>
+              <option>ময়মনসিংহ</option><option>রংপুর</option><option>কুমিল্লা</option>
+              <option>গাজীপুর</option><option>নারায়ণগঞ্জ</option><option>অন্যান্য</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>ইমেইল</label>
+            <input type="email" id="reg-email" placeholder="example@gmail.com">
+          </div>
+          <div class="input-group">
+            <label>পাসওয়ার্ড</label>
+            <input type="password" id="reg-password" placeholder="••••••••">
+          </div>
+          <button class="btn-primary" onclick="registerUser()">অ্যাকাউন্ট তৈরি করুন</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN SCREEN -->
+  <div id="main-screen" class="screen hidden">
+    <!-- Top Nav -->
+    <header class="topnav">
+      <div class="topnav-left">
+        <div class="logo-circle xsmall">
+          <svg width="16" height="16" viewBox="0 0 48 48" fill="none">
+            <path d="M16 20h16M16 28h10" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="34" cy="28" r="6" fill="#FF6B35"/>
+          </svg>
+        </div>
+        <span class="nav-brand">সাথী</span>
+      </div>
+      <div class="topnav-right">
+        <div class="notif-btn">🔔</div>
+        <div class="avatar" id="user-avatar" onclick="showScreen('profile-screen')">আ</div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="main-content">
+      <!-- Greeting -->
+      <div class="greeting-card">
+        <div class="greeting-text">
+          <p class="greeting-hi">নমস্কার, <span id="user-name-display">বন্ধু</span>! 👋</p>
+          <p class="greeting-sub">আজ কী শিখবেন?</p>
+        </div>
+        <div class="greeting-badge">
+          <span id="user-class-display">ক্লাস ১০</span>
+        </div>
+      </div>
+
+      <!-- Daily Question -->
+      <div class="section-title">
+        <span>🔥 আজকের প্রশ্ন</span>
+        <span class="section-badge">নতুন</span>
+      </div>
+      <div class="daily-question-card" onclick="showScreen('room-screen'); loadRoom('daily')">
+        <div class="dq-icon">❓</div>
+        <div class="dq-content">
+          <p class="dq-text" id="daily-question-text">গণিতের সহজ উপায়ে সমাধান কী?</p>
+          <div class="dq-meta">
+            <span>💬 ১২৪ জন উত্তর দিয়েছে</span>
+            <span class="dq-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subject Rooms -->
+      <div class="section-title">
+        <span>📚 বিষয়ভিত্তিক রুম</span>
+      </div>
+      <div class="rooms-grid">
+        <div class="room-card" onclick="showScreen('room-screen'); loadRoom('math')" style="--rc:#006A4E">
+          <div class="room-icon">📐</div>
+          <div class="room-name">গণিত</div>
+          <div class="room-count">৮৯ জন</div>
+        </div>
+        <div class="room-card" onclick="showScreen('room-screen'); loadRoom('science')" style="--rc:#2196F3">
+          <div class="room-icon">🔬</div>
+          <div class="room-name">বিজ্ঞান</div>
+          <div class="room-count">৬৭ জন</div>
+        </div>
+        <div class="room-card" onclick="showScreen('room-screen'); loadRoom('english')" style="--rc:#9C27B0">
+          <div class="room-icon">📖</div>
+          <div class="room-name">ইংরেজি</div>
+          <div class="room-count">১১২ জন</div>
+        </div>
+        <div class="room-card" onclick="showScreen('room-screen'); loadRoom('bangla')" style="--rc:#F44336">
+          <div class="room-icon">✍️</div>
+          <div class="room-name">বাংলা</div>
+          <div class="room-count">৯৩ জন</div>
+        </div>
+        <div class="room-card" onclick="showScreen('room-screen'); loadRoom('ict')" style="--rc:#FF6B35">
+          <div class="room-icon">💻</div>
+          <div class="room-name">আইসিটি</div>
+          <div class="room-count">৪৫ জন</div>
+        </div>
+        <div class="room-card" onclick="showScreen('room-screen'); loadRoom('general')" style="--rc:#607D8B">
+          <div class="room-icon">💬</div>
+          <div class="room-name">সাধারণ</div>
+          <div class="room-count">২০৩ জন</div>
+        </div>
+      </div>
+
+      <!-- Senior Guide -->
+      <div class="section-title">
+        <span>🎓 সিনিয়র গাইড</span>
+        <span class="see-all" onclick="showScreen('seniors-screen')">সব দেখুন →</span>
+      </div>
+      <div class="seniors-scroll">
+        <div class="senior-card" onclick="startChat('senior1')">
+          <div class="senior-avatar" style="background:#006A4E">র</div>
+          <div class="senior-info">
+            <p class="senior-name">রাহিম ভাই</p>
+            <p class="senior-detail">BUET • ঢাকা</p>
+            <div class="senior-badge">গণিত বিশেষজ্ঞ</div>
+          </div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="senior-card" onclick="startChat('senior2')">
+          <div class="senior-avatar" style="background:#9C27B0">স</div>
+          <div class="senior-info">
+            <p class="senior-name">সুমাইয়া আপু</p>
+            <p class="senior-detail">DU • চট্টগ্রাম</p>
+            <div class="senior-badge">ইংরেজি বিশেষজ্ঞ</div>
+          </div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="senior-card" onclick="startChat('senior3')">
+          <div class="senior-avatar" style="background:#2196F3">ক</div>
+          <div class="senior-info">
+            <p class="senior-name">করিম ভাই</p>
+            <p class="senior-detail">CUET • রাজশাহী</p>
+            <div class="senior-badge">বিজ্ঞান বিশেষজ্ঞ</div>
+          </div>
+          <div class="online-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="setActiveNav(this); showScreen('main-screen')">
+        <span class="nav-icon">🏠</span><span class="nav-label">হোম</span>
+      </button>
+      <button class="nav-item" onclick="setActiveNav(this); showScreen('room-screen'); loadRoom('general')">
+        <span class="nav-icon">💬</span><span class="nav-label">রুম</span>
+      </button>
+      <button class="nav-item ai-btn" onclick="toggleAI()">
+        <span class="nav-icon">✨</span><span class="nav-label">AI সাথী</span>
+      </button>
+      <button class="nav-item" onclick="setActiveNav(this); showScreen('seniors-screen')">
+        <span class="nav-icon">🎓</span><span class="nav-label">সিনিয়র</span>
+      </button>
+      <button class="nav-item" onclick="setActiveNav(this); showScreen('profile-screen')">
+        <span class="nav-icon">👤</span><span class="nav-label">প্রোফাইল</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ROOM SCREEN -->
+  <div id="room-screen" class="screen hidden">
+    <header class="room-header">
+      <button class="back-btn" onclick="showScreen('main-screen')">←</button>
+      <div class="room-header-info">
+        <h2 id="room-title">সাধারণ রুম</h2>
+        <p id="room-subtitle">২০৩ জন অনলাইন</p>
+      </div>
+      <div class="room-options">⋮</div>
+    </header>
+
+    <div class="chat-container" id="chat-messages">
+      <div class="chat-date-divider">আজকের আলোচনা</div>
+      <!-- Messages will be loaded here -->
+    </div>
+
+    <div class="chat-input-area">
+      <button class="attach-btn">📎</button>
+      <input type="text" id="chat-input" placeholder="প্রশ্ন বা মন্তব্য লিখুন..." onkeypress="handleChatKey(event)">
+      <button class="send-btn" onclick="sendMessage()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- SENIORS SCREEN -->
+  <div id="seniors-screen" class="screen hidden">
+    <header class="room-header">
+      <button class="back-btn" onclick="showScreen('main-screen')">←</button>
+      <div class="room-header-info">
+        <h2>সিনিয়র গাইড</h2>
+        <p>অভিজ্ঞ বড় ভাই/আপু</p>
+      </div>
+    </header>
+    <div class="seniors-list">
+      <div class="search-bar">
+        <input type="text" placeholder="🔍 নাম বা বিষয় খুঁজুন...">
+      </div>
+      <div class="filter-chips">
+        <span class="chip active">সবাই</span>
+        <span class="chip">গণিত</span>
+        <span class="chip">ইংরেজি</span>
+        <span class="chip">বিজ্ঞান</span>
+        <span class="chip">আইসিটি</span>
+      </div>
+      <div id="seniors-list-content"></div>
+    </div>
+  </div>
+
+  <!-- PROFILE SCREEN -->
+  <div id="profile-screen" class="screen hidden">
+    <header class="room-header">
+      <button class="back-btn" onclick="showScreen('main-screen')">←</button>
+      <div class="room-header-info">
+        <h2>আমার প্রোফাইল</h2>
+      </div>
+      <button class="logout-btn" onclick="logoutUser()">বের হন</button>
+    </header>
+    <div class="profile-content">
+      <div class="profile-hero">
+        <div class="profile-avatar" id="profile-avatar-big">আ</div>
+        <h2 id="profile-name">আলাপ</h2>
+        <p id="profile-class-district">ক্লাস ১০ • ঢাকা</p>
+        <div class="profile-stats">
+          <div class="stat"><span class="stat-num">২৪</span><span class="stat-label">প্রশ্ন</span></div>
+          <div class="stat"><span class="stat-num">৮৭</span><span class="stat-label">উত্তর</span></div>
+          <div class="stat"><span class="stat-num">১২</span><span class="stat-label">দিন</span></div>
+        </div>
+      </div>
+      <div class="profile-badges">
+        <h3>অর্জন 🏆</h3>
+        <div class="badges-row">
+          <div class="badge-item">🌟<span>সক্রিয় সদস্য</span></div>
+          <div class="badge-item">🎯<span>প্রশ্নবীর</span></div>
+          <div class="badge-item">💡<span>সমাধানকারী</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- AI ASSISTANT PANEL -->
+<div id="ai-panel" class="ai-panel hidden">
+  <div class="ai-header">
+    <div class="ai-title">
+      <div class="ai-orb"></div>
+      <span>AI সাথী</span>
+    </div>
+    <button class="ai-close" onclick="toggleAI()">✕</button>
+  </div>
+  <div class="ai-messages" id="ai-messages">
+    <div class="ai-welcome">
+      <div class="ai-orb large"></div>
+      <h3>আমি AI সাথী! 🤖</h3>
+      <p>যেকোনো প্রশ্ন করুন বাংলায়। আমি সাহায্য করতে এখানে আছি!</p>
+      <div class="ai-suggestions">
+        <button onclick="askAI('গণিতের ত্রিকোণমিতি সহজে বোঝাও')">গণিত বোঝাও</button>
+        <button onclick="askAI('ইংরেজি গ্রামার টিপস দাও')">ইংরেজি গ্রামার</button>
+        <button onclick="askAI('HSC পরীক্ষার প্রস্তুতি কীভাবে নেব?')">HSC প্রস্তুতি</button>
+      </div>
+    </div>
+  </div>
+  <div class="ai-input-area">
+    <input type="text" id="ai-input" placeholder="প্রশ্ন লিখুন..." onkeypress="handleAIKey(event)">
+    <button class="ai-send" onclick="sendAIMessage()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+<div id="ai-overlay" class="ai-overlay hidden" onclick="toggleAI()"></div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden"></div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, setDoc, getDoc, limit } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB26CdNwz-Wuq6474wWu9YB29X-aFre-cQ",
+    authDomain: "sathi-app-2efe2.firebaseapp.com",
+    projectId: "sathi-app-2efe2",
+    storageBucket: "sathi-app-2efe2.firebasestorage.app",
+    messagingSenderId: "603374780468",
+    appId: "1:603374780468:web:3081cdc24d8c7807d2ca61"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  let currentUser = null;
+  let currentRoom = 'general';
+  let unsubscribeChat = null;
+
+  // Auth state
+  onAuthStateChanged(auth, async (user) => {
+    document.getElementById('splash-screen').style.display = 'none';
+    document.getElementById('app').classList.remove('hidden');
+    if (user) {
+      currentUser = user;
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        window._userData = data;
+        updateUserUI(data);
+      } else {
+        updateUserUI({ name: user.displayName || 'বন্ধু', class: '', district: '' });
+      }
+      showScreen('main-screen');
+    } else {
+      showScreen('auth-screen');
+    }
+  });
+
+  function updateUserUI(data) {
+    const name = data.name || 'বন্ধু';
+    const cls = data.class || '';
+    const dist = data.district || '';
+    document.getElementById('user-name-display').textContent = name.split(' ')[0];
+    document.getElementById('user-class-display').textContent = cls || 'সাথী';
+    document.getElementById('profile-name').textContent = name;
+    document.getElementById('profile-class-district').textContent = `${cls} • ${dist}`;
+    document.getElementById('profile-avatar-big').textContent = name[0];
+    document.getElementById('user-avatar').textContent = name[0];
+  }
+
+  // Register
+  window.registerUser = async () => {
+    const name = document.getElementById('reg-name').value.trim();
+    const cls = document.getElementById('reg-class').value;
+    const district = document.getElementById('reg-district').value;
+    const email = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-password').value;
+    if (!name || !cls || !district || !email || !password) {
+      showToast('সব তথ্য পূরণ করুন!'); return;
+    }
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(cred.user, { displayName: name });
+      await setDoc(doc(db, 'users', cred.user.uid), { name, class: cls, district, email, createdAt: serverTimestamp() });
+      showToast('অ্যাকাউন্ট তৈরি হয়েছে! 🎉');
+    } catch (e) {
+      showToast('সমস্যা হয়েছে: ' + e.message);
+    }
+  };
+
+  // Login
+  window.loginUser = async () => {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    if (!email || !password) { showToast('ইমেইল ও পাসওয়ার্ড দিন!'); return; }
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      showToast('স্বাগতম! 👋');
+    } catch (e) {
+      showToast('ইমেইল বা পাসওয়ার্ড ভুল!');
+    }
+  };
+
+  // Google Login
+  window.loginWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (!userDoc.exists()) {
+        await setDoc(doc(db, 'users', user.uid), {
+          name: user.displayName, email: user.email,
+          class: 'অজানা', district: 'অজানা', createdAt: serverTimestamp()
+        });
+      }
+      showToast('স্বাগতম! 👋');
+    } catch (e) { showToast('সমস্যা হয়েছে!'); }
+  };
+
+  // Logout
+  window.logoutUser = async () => {
+    await signOut(auth);
+    showToast('বের হয়ে গেছেন!');
+  };
+
+  // Load Room
+  window.loadRoom = (roomId) => {
+    currentRoom = roomId;
+    const rooms = {
+      math: { title: 'গণিত রুম', sub: '৮৯ জন অনলাইন' },
+      science: { title: 'বিজ্ঞান রুম', sub: '৬৭ জন অনলাইন' },
+      english: { title: 'ইংরেজি রুম', sub: '১১২ জন অনলাইন' },
+      bangla: { title: 'বাংলা রুম', sub: '৯৩ জন অনলাইন' },
+      ict: { title: 'আইসিটি রুম', sub: '৪৫ জন অনলাইন' },
+      general: { title: 'সাধারণ রুম', sub: '২০৩ জন অনলাইন' },
+      daily: { title: 'আজকের প্রশ্ন', sub: '১২৪ জন উত্তর দিয়েছে' }
+    };
+    const r = rooms[roomId] || rooms.general;
+    document.getElementById('room-title').textContent = r.title;
+    document.getElementById('room-subtitle').textContent = r.sub;
+
+    if (unsubscribeChat) unsubscribeChat();
+    const messagesEl = document.getElementById('chat-messages');
+    messagesEl.innerHTML = '<div class="chat-date-divider">আজকের আলোচনা</div>';
+
+    const q = query(collection(db, `rooms/${roomId}/messages`), orderBy('createdAt'), limit(50));
+    unsubscribeChat = onSnapshot(q, (snap) => {
+      snap.docChanges().forEach(change => {
+        if (change.type === 'added') {
+          const data = change.doc.data();
+          appendMessage(data, messagesEl);
+        }
+      });
+    });
+  };
+
+  function appendMessage(data, container) {
+    const isMe = currentUser && data.uid === currentUser.uid;
+    const div = document.createElement('div');
+    div.className = `chat-msg ${isMe ? 'mine' : 'theirs'}`;
+    div.innerHTML = `
+      ${!isMe ? `<div class="msg-avatar">${(data.name||'?')[0]}</div>` : ''}
+      <div class="msg-bubble">
+        ${!isMe ? `<div class="msg-name">${data.name||'অজানা'} ${data.class ? '· '+data.class : ''}</div>` : ''}
+        <div class="msg-text">${data.text}</div>
+        <div class="msg-time">${formatTime(data.createdAt)}</div>
+      </div>
+    `;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  window.sendMessage = async () => {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text || !currentUser) return;
+    input.value = '';
+    try {
+      await addDoc(collection(db, `rooms/${currentRoom}/messages`), {
+        text, uid: currentUser.uid,
+        name: window._userData?.name || currentUser.displayName || 'বন্ধু',
+        class: window._userData?.class || '',
+        createdAt: serverTimestamp()
+      });
+    } catch (e) { showToast('পাঠানো যায়নি!'); }
+  };
+
+  window.handleChatKey = (e) => { if (e.key === 'Enter') sendMessage(); };
+
+  // Load Seniors
+  window.loadSeniors = () => {
+    const seniors = [
+      { name: 'রাহিম ভাই', uni: 'BUET', district: 'ঢাকা', subject: 'গণিত বিশেষজ্ঞ', color: '#006A4E' },
+      { name: 'সুমাইয়া আপু', uni: 'DU', district: 'চট্টগ্রাম', subject: 'ইংরেজি বিশেষজ্ঞ', color: '#9C27B0' },
+      { name: 'করিম ভাই', uni: 'CUET', district: 'রাজশাহী', subject: 'বিজ্ঞান বিশেষজ্ঞ', color: '#2196F3' },
+      { name: 'নাফিসা আপু', uni: 'RUET', district: 'খুলনা', subject: 'আইসিটি বিশেষজ্ঞ', color: '#FF6B35' },
+      { name: 'তানভীর ভাই', uni: 'SUST', district: 'সিলেট', subject: 'পদার্থবিজ্ঞান', color: '#607D8B' },
+      { name: 'রিয়া আপু', uni: 'JU', district: 'ময়মনসিংহ', subject: 'রসায়ন বিশেষজ্ঞ', color: '#E91E63' },
+    ];
+    const container = document.getElementById('seniors-list-content');
+    container.innerHTML = seniors.map(s => `
+      <div class="senior-list-card" onclick="startChat('${s.name}')">
+        <div class="senior-avatar large" style="background:${s.color}">${s.name[0]}</div>
+        <div class="senior-list-info">
+          <p class="senior-name">${s.name}</p>
+          <p class="senior-detail">${s.uni} • ${s.district}</p>
+          <div class="senior-badge">${s.subject}</div>
+        </div>
+        <button class="connect-btn">কানেক্ট</button>
+      </div>
+    `).join('');
+  };
+
+  window.startChat = (id) => { showToast('শীঘ্রই আসছে! 🚀'); };
+
+  // AI
+  window.sendAIMessage = async () => {
+    const input = document.getElementById('ai-input');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    await askAI(text);
+  };
+
+  window.askAI = async (text) => {
+    const container = document.getElementById('ai-messages');
+    const welcome = container.querySelector('.ai-welcome');
+    if (welcome) welcome.remove();
+
+    // User message
+    container.innerHTML += `<div class="ai-msg user"><div class="ai-bubble user">${text}</div></div>`;
+
+    // Typing
+    const typingId = 'typing-' + Date.now();
+    container.innerHTML += `<div class="ai-msg ai" id="${typingId}"><div class="ai-bubble ai typing"><span></span><span></span><span></span></div></div>`;
+    container.scrollTop = container.scrollHeight;
+
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCWv7VtbYAm1hXbcBF3fEG0UGTd4PgQwCc`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: `তুমি "AI সাথী" — বাংলাদেশের স্টুডেন্টদের জন্য একটি বন্ধুত্বপূর্ণ AI সহকারী। সবসময় বাংলায় উত্তর দাও। সহজ, স্পষ্ট এবং উৎসাহজনকভাবে উত্তর দাও। স্টুডেন্টের প্রশ্ন: ${text}` }] }]
+        })
+      });
+      const data = await res.json();
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'দুঃখিত, উত্তর দিতে পারছি না।';
+      document.getElementById(typingId).outerHTML = `<div class="ai-msg ai"><div class="ai-bubble ai">${reply.replace(/\n/g,'<br>')}</div></div>`;
+    } catch (e) {
+      document.getElementById(typingId).outerHTML = `<div class="ai-msg ai"><div class="ai-bubble ai">দুঃখিত, সমস্যা হয়েছে। আবার চেষ্টা করুন।</div></div>`;
+    }
+    container.scrollTop = container.scrollHeight;
+  };
+
+  window.handleAIKey = (e) => { if (e.key === 'Enter') sendAIMessage(); };
+
+  function formatTime(ts) {
+    if (!ts) return '';
+    const d = ts.toDate ? ts.toDate() : new Date();
+    return d.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  // Expose functions
+  window._loadSeniors = window.loadSeniors;
+</script>
+
+<script src="js/app.js"></script>
+</body>
+</html>

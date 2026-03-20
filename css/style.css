@@ -387,6 +387,13 @@ body { background: var(--cream); color: var(--text); min-height: 100vh; overflow
 @keyframes pulse { 0%,100% { box-shadow: 0 0 12px rgba(0,106,78,0.4); } 50% { box-shadow: 0 0 24px rgba(0,106,78,0.7); } }
 @keyframes bounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
 
+.forgot-link { text-align: right; margin-top: -8px; margin-bottom: 12px; }
+.forgot-link span { color: var(--green); font-size: 13px; cursor: pointer; font-weight: 500; }
+.forgot-link span:hover { text-decoration: underline; }
+.password-wrap { position: relative; display: flex; align-items: center; }
+.password-wrap input { flex: 1; padding-right: 44px !important; }
+.eye-btn { position: absolute; right: 12px; cursor: pointer; font-size: 16px; user-select: none; }
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
